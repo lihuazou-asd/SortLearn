@@ -18,7 +18,11 @@ class Program
 
     /// <summary>
     /// 冒泡排序
-    /// 稳定，因为当遇到相同的时候不会交换
+    /// 时间复杂度:O(n²)
+    /// 空间复杂度:O(1)
+    /// 稳定性:稳定，因为当遇到相同的时候不会交换
+    /// 最坏时间复杂度:O(n²) - 逆序
+    /// 最好时间复杂度:O(n) - 已排序
     /// </summary>
     /// <param name="list"></param>
     static void BubbleSort(List<int> list)
@@ -41,7 +45,11 @@ class Program
 
     /// <summary>
     /// 选择排序升序
-    /// 不稳定，根本原因在于被交换出去的值会跨过与自己想通的值导致不稳定
+    /// 时间复杂度:O(n²)
+    /// 空间复杂度:O(1)
+    /// 稳定性:不稳定，根本原因在于被交换出去的值会跨过与自己相同的值导致不稳定
+    /// 最坏时间复杂度:O(n²)
+    /// 最好时间复杂度:O(n²)
     /// </summary>
     /// <param name="list"></param>
     static void SelectionSort1(List<int> list)
@@ -61,7 +69,15 @@ class Program
         }
     }
 
-    //选择排序降序
+    /// <summary>
+    /// 选择排序降序
+    /// 时间复杂度:O(n²)
+    /// 空间复杂度:O(1)
+    /// 稳定性:不稳定
+    /// 最坏时间复杂度:O(n²)
+    /// 最好时间复杂度:O(n²)
+    /// </summary>
+    /// <param name="list"></param>
     static void SelectionSort2(List<int> list)
     {
         for (int i = 0; i < list.Count - 1; i++)
@@ -82,7 +98,11 @@ class Program
 
     /// <summary>
     /// 插入排序，每步交换版
-    /// 稳定的
+    /// 时间复杂度:O(n²)
+    /// 空间复杂度:O(1)
+    /// 稳定性:稳定
+    /// 最坏时间复杂度:O(n²) - 逆序
+    /// 最好时间复杂度:O(n) - 已排序
     /// </summary>
     /// <param name="list"></param>
     static void InsertSort1(List<int> list)
@@ -104,8 +124,12 @@ class Program
     }
     
     /// <summary>
-    /// 插入排序，每步交换版
-    /// 稳定的
+    /// 插入排序，移动优化版
+    /// 时间复杂度:O(n²)
+    /// 空间复杂度:O(1)
+    /// 稳定性:稳定
+    /// 最坏时间复杂度:O(n²) - 逆序
+    /// 最好时间复杂度:O(n) - 已排序
     /// </summary>
     /// <param name="list"></param>
     static void InsertSort2(List<int> list)
@@ -130,4 +154,19 @@ class Program
             list[insertIndex] = temp;
         }
     }
+
+    static void ShellSort(List<int> list)
+    {
+
+
+        for (int step = list.Count / 2; step > 0; step /= 2)
+        {
+            for (int i = 0; i < step; i++)
+            {
+                
+            }
+        }
+    }
+    
+    
 }
