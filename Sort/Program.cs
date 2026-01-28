@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         var list = new List<int>() { 1,3,4,6,1,2,3,4,5,6,1,2,3,56,7,1,2,5 };
-        MergeSort(list);
+        QuickSort(list);
 
         string info = "";
         foreach (var item in list)
@@ -267,6 +267,64 @@ class Program
         }
     }
     
+    /// <summary>
+    /// 快速排序
+    /// 时间复杂度:O(n log n)
+    /// 空间复杂度:O(log n) - 递归调用栈空间
+    /// 稳定性:不稳定
+    /// 最坏时间复杂度:O(n²) - 每次分区都极度不平衡时（如已排序数组）
+    /// 最好时间复杂度:O(n log n) - 每次分区都较为平衡时
+    /// </summary>
+    static void QuickSort(List<int> list)
+    {
+        QuickSort(list, 0, list.Count - 1);
+    }
     
+    static void QuickSort(List<int> list, int left, int right)
+    {
+        // 递归终止条件：当区间只有一个或没有元素时
+        if (left >= right) return;
+    
+        int pivot = list[left]; // 选择基准值，left位置成为第一个坑
+        int i = left;  // 左指针
+        int j = right; // 右指针
+    
+        // 分区过程：将小于pivot的元素放左边，大于pivot的元素放右边
+        while (i < j)
+        {
+            // 从右向左找第一个小于pivot的元素
+            while (i < j && list[j] >= pivot)
+            {
+                j--;
+            }
+            // 找到后填坑，j位置成为新坑
+            if (i < j)
+            {
+                list[i] = list[j];
+                i++;
+            }
+        
+            // 从左向右找第一个大于pivot的元素
+            while (i < j && list[i] <= pivot)
+            {
+                i++;
+            }
+            // 找到后填坑，i位置成为新坑
+            if (i < j)
+            {
+                list[j] = list[i];
+                j--;
+            }
+        }
+    
+        // 将pivot放到最终位置（此时i==j）
+        list[i] = pivot;
+    
+        // 递归排序左半部分
+        QuickSort(list, left, i - 1);
+        // 递归排序右半部分
+        QuickSort(list, i + 1, right);
+    }
+
     
 }
