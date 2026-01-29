@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         var list = new List<int>() { 1,3,4,6,1,2,3,4,5,6,1,2,3,56,7,1,2,5 };
-        QuickSort(list);
+        HeapSort(list);
 
         string info = "";
         foreach (var item in list)
@@ -326,5 +326,62 @@ class Program
         QuickSort(list, i + 1, right);
     }
 
+    
+    /// <summary>
+    /// 堆排序
+    /// 时间复杂度:O(n log n)
+    /// 空间复杂度:O(1)
+    /// 稳定性:不稳定
+    /// 最坏时间复杂度:O(n log n) - 任何情况都需要完整的建堆和排序过程
+    /// 最好时间复杂度:O(n log n) - 任何情况都需要完整的建堆和排序过程
+    /// </summary>
+    static void HeapSort(List<int> list)
+    {
+        int n = list.Count;
+
+        // 第一阶段：建堆，从最后一个非叶子节点开始向下调整
+        for (int i = n / 2 - 1; i >= 0; i--)
+        {
+            SiftDown(list, i, n);
+        }
+
+        // 第二阶段：排序，将堆顶元素与末尾元素交换，然后重新调整堆
+        for (int i = n - 1; i > 0; i--)
+        {
+            (list[0], list[i]) = (list[i], list[0]); // 将最大值移到末尾
+            SiftDown(list, 0, i); // 重新调整剩余元素为最大堆
+        }
+    }
+    
+    /// <summary>
+    /// 向下调整堆，维护最大堆性质
+    /// </summary>
+    /// <param name="list">待调整的数组</param>
+    /// <param name="root">调整的根节点索引</param>
+    /// <param name="heapSize">堆的大小</param>
+    static void SiftDown(List<int> list, int root, int heapSize)
+    {
+        int parent = root;
+        // 当父节点有左子节点时继续调整
+        while (parent * 2 + 1 < heapSize)
+        {
+            int child = parent * 2 + 1; // 左子节点索引
+            // 找到左右子节点中的较大者
+            if (child + 1 < heapSize && list[child] < list[child + 1])
+            {
+                child++; // 右子节点更大，选择右子节点
+            }
+            // 如果父节点小于子节点，交换并继续向下调整
+            if(list[parent] < list[child])
+            {
+                (list[parent], list[child]) = (list[child], list[parent]);
+                parent = child; // 更新父节点位置
+            }
+            else
+            {
+                break; // 堆性质已满足，停止调整
+            }
+        }
+    }
     
 }
